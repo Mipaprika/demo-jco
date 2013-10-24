@@ -1,5 +1,6 @@
 package com.siping.jco;
 
+import com.sap.conn.jco.JCoAttributes;
 import com.sap.conn.jco.JCoDestination;
 import com.sap.conn.jco.JCoDestinationManager;
 import com.sap.conn.jco.JCoException;
@@ -7,6 +8,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static com.sap.conn.jco.ext.Environment.registerDestinationDataProvider;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,6 +23,7 @@ public class JcoClientTest
     MyDestinationDataProvider myProvider;
     String destName = "ABAP_AS";
     private JCoDestination dest;
+    private JcoClient jcoClient;
 
     @Before
     public void setUp() throws Exception {
@@ -38,9 +42,14 @@ public class JcoClientTest
 
     }
 
-    @Test(expected = JCoException.class)
+    @Test
     public void shouldConnectToDestination() throws Exception {
-        JCoDestination destination = JCoDestinationManager.getDestination(destName);
-        destination.ping();
+        JCoDestination destination;
+
+        jcoClient = new JcoClient();
+        destination = jcoClient.connectToDestination(destName);
+
+        JCoAttributes jcoAttributes = destination.getAttributes();
+        assertThat(jcoAttributes.getClient(),is("00"));
     }
 }
