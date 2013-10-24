@@ -14,18 +14,27 @@ import static com.sap.conn.jco.ext.Environment.registerDestinationDataProvider;
  * To change this template use File | Settings | File Templates.
  */
 public class JcoClient {
-    public JCoDestination connectToDestination(String destName) throws JCoException {
-        MyDestinationDataProvider myProvider = new MyDestinationDataProvider();
-        try
-        {
-            registerDestinationDataProvider(myProvider);
-        }
-        catch(IllegalStateException providerAlreadyRegisteredException)
-        {
-            throw new Error(providerAlreadyRegisteredException);
-        }
+    private static JCoDestination destination = null;
+    private MyDestinationDataProvider myProvider = null;
 
-        myProvider.changeProperties(destName,DestinationPropertiesHelper.getDestinationPropertiesFromUI());
-        return JCoDestinationManager.getDestination(destName);
+    public JCoDestination getDestination(String destName) throws JCoException {
+        if (this.destination == null){
+            myProvider = new MyDestinationDataProvider();
+            try
+            {
+                registerDestinationDataProvider(myProvider);
+            }
+            catch(IllegalStateException providerAlreadyRegisteredException)
+            {
+                throw new Error(providerAlreadyRegisteredException);
+            }
+            myProvider.changeProperties(destName,DestinationPropertiesHelper.getDestinationPropertiesFromUI());
+            this.destination = JCoDestinationManager.getDestination(destName);
+            return this.destination;
+        }
+        else {
+            return destination;
+        }
     }
+
 }

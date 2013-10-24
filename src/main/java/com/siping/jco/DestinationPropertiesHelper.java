@@ -16,12 +16,18 @@ public class DestinationPropertiesHelper {
     {
         //adapt parameters in order to configure a valid destination
         Properties connectProperties = new Properties();
-        connectProperties.setProperty(DestinationDataProvider.JCO_ASHOST, "appserver");
+        connectProperties.setProperty(DestinationDataProvider.JCO_ASHOST, "10.3.22.2");
         connectProperties.setProperty(DestinationDataProvider.JCO_SYSNR,  "00");
-        connectProperties.setProperty(DestinationDataProvider.JCO_CLIENT, "000");
-        connectProperties.setProperty(DestinationDataProvider.JCO_USER,   "JCOTESTER");
-        connectProperties.setProperty(DestinationDataProvider.JCO_PASSWD, "JCOTESTERSPASSWORD");
+        connectProperties.setProperty(DestinationDataProvider.JCO_CLIENT, "800");
+        connectProperties.setProperty(DestinationDataProvider.JCO_USER,   "wyw");
+        connectProperties.setProperty(DestinationDataProvider.JCO_PASSWD, "qwerty");
         connectProperties.setProperty(DestinationDataProvider.JCO_LANG,   "en");
+//        connectProperties.setProperty(DestinationDataProvider.JCO_ASHOST, "192.168.10.181");
+//        connectProperties.setProperty(DestinationDataProvider.JCO_SYSNR,  "01");
+//        connectProperties.setProperty(DestinationDataProvider.JCO_CLIENT, "800");
+//        connectProperties.setProperty(DestinationDataProvider.JCO_USER,   "YH");
+//        connectProperties.setProperty(DestinationDataProvider.JCO_PASSWD, "yaohui");
+//        connectProperties.setProperty(DestinationDataProvider.JCO_LANG,   "en");
         return connectProperties;
     }
 }
